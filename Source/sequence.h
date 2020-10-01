@@ -10,7 +10,7 @@
 namespace util {
 
 template <typename T> class Sequence final {
-  static_assert(std::is_integral<T>::value);
+  static_assert(std::is_integral_v<T>);
 
 public:
   Sequence() = delete;

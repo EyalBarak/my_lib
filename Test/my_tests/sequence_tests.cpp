@@ -17,6 +17,7 @@ TEST(BasicSequenceTests, ConstructAndDeref) {
 TEST(BasicSequenceTests, BasicUsage) {
   for (const auto v : util::sequence(1, 4)) {
     EXPECT_TRUE(true);
+    EXPECT_GT(v, 0);
   }
 }
 
