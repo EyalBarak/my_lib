@@ -35,17 +35,36 @@ public:
 
     constexpr T operator*() const noexcept { return val_; }
 
+    constexpr iterator &operator++() noexcept {
+      val_++;
+      return *this;
+    }
+
+    constexpr iterator operator++(int) noexcept { return iterator{val_++}; }
+
+    constexpr bool operator==(const iterator &rhs) noexcept {
+      return val_ == rhs.val_;
+    }
+
+    constexpr bool operator!=(const iterator &rhs) noexcept {
+      return !(*this == rhs);
+    }
+
   private:
     T val_;
   };
-  constexpr iterator begin() noexcept { return iterator{beg_}; }
-  constexpr iterator end() noexcept { return iterator{end_}; }
+  constexpr iterator begin() noexcept { return cbegin(); }
+  constexpr iterator end() noexcept { return cend(); }
 
   using const_iterator = iterator;
-  constexpr const_iterator begin() const noexcept;
-  constexpr const_iterator end() const noexcept;
-  constexpr const_iterator cbegin() const noexcept;
-  constexpr const_iterator cend() const noexcept;
+  constexpr const_iterator cbegin() const noexcept {
+    return const_iterator{beg_};
+  }
+  constexpr const_iterator cend() const noexcept {
+    return const_iterator{end_};
+  }
+  constexpr const_iterator begin() const noexcept { return cbegin(); }
+  constexpr const_iterator end() const noexcept { return cend(); }
 
 private:
   const T beg_, end_;
