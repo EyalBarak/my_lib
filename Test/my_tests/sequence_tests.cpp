@@ -6,6 +6,8 @@
 
 #include "sequence.h"
 
+#include <algorithm>
+#include <numeric>
 #include <set>
 
 TEST(BasicSequenceTests, ConstructAndDeref) {
@@ -33,3 +35,30 @@ TEST(BasicSequenceTests, BasicUsageCorrectness) {
     EXPECT_NE(flags.find(i), flags.end());
   }
 }
+
+class UnsignedIntPTests : public testing::TestWithParam<int> {};
+
+TEST_P(UnsignedIntPTests, ArithmeticSumFromZero) {
+  auto sum{0};
+  for (const auto i : util::sequence(0, GetParam())) {
+    sum += i;
+  }
+  EXPECT_EQ(sum, ((GetParam() - 1) * GetParam()) / 2);
+}
+
+TEST_P(UnsignedIntPTests, SameAsIota) {
+  const auto vec1 = []() {
+    std::vector<int> result(GetParam(), 0);
+    std::iota(result.begin(), result.end(), 0);
+    return result;
+  }();
+  const auto vec2 = []() {
+    std::vector<int> result(GetParam(), 0);
+    auto seq{util::sequence(0, GetParam())};
+    std::copy(seq.begin(), seq.end(), result.begin());
+    return result;
+  }();
+  EXPECT_EQ(vec1, vec2);
+}
+
+INSTANTIATE_TEST_SUITE_P(UnsignedPs, UnsignedIntPTests, testing::Range(0, 20));

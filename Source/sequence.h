@@ -24,6 +24,12 @@ public:
 
   class iterator {
   public:
+    using iterator_category = std::forward_iterator_tag;
+    using value_type = T;
+    using difference_type = T;
+    using reference = T &;
+    using pointer = T *;
+
     iterator() = delete;
     constexpr iterator(const iterator &other) noexcept = default;
     constexpr iterator(iterator &&other) noexcept = default;
@@ -34,6 +40,8 @@ public:
     constexpr explicit iterator(T val) noexcept : val_(val) {}
 
     constexpr T operator*() const noexcept { return val_; }
+
+    constexpr const T *operator->() const noexcept { return &val_; }
 
     constexpr iterator &operator++() noexcept {
       val_++;
