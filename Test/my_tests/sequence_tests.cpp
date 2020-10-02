@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <numeric>
 #include <set>
+#include <string>
 
 TEST(BasicSequenceTests, ConstructAndDeref) {
   auto seq{util::sequence(0, 7)};
@@ -34,6 +35,14 @@ TEST(BasicSequenceTests, BasicUsageCorrectness) {
   for (auto i = 0; i < 12; i++) {
     EXPECT_NE(flags.find(i), flags.end());
   }
+}
+
+TEST(BasicSequenceTests, CharTest) {
+  auto result{std::string(5, 'a')};
+  EXPECT_EQ(result, "aaaaa");
+  auto seq{util::sequence('a', 'f')};
+  std::copy(seq.cbegin(), seq.cend(), result.begin());
+  EXPECT_EQ(result, "abcde");
 }
 
 class UnsignedIntPTests : public testing::TestWithParam<int> {};
