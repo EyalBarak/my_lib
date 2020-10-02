@@ -45,6 +45,24 @@ TEST(BasicSequenceTests, CharTest) {
   EXPECT_EQ(result, "abcde");
 }
 
+TEST(BasicSequenceTests, DefaultTest) {
+  auto vec1 = []() {
+    std::vector<int> result;
+    for (const auto i : util::sequence(10)) {
+      result.push_back(i);
+    }
+    return result;
+  }();
+  auto vec2 = []() {
+    std::vector<int> result;
+    for (auto i{0}; i < 10; i++) {
+      result.push_back(i);
+    }
+    return result;
+  }();
+  EXPECT_EQ(vec1, vec2);
+}
+
 class UnsignedIntPTests : public testing::TestWithParam<int> {};
 
 TEST_P(UnsignedIntPTests, ArithmeticSumFromZero) {

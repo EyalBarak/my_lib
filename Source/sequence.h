@@ -82,6 +82,10 @@ template <typename T> constexpr Sequence<T> sequence(T beg, T end) noexcept {
   return {beg, end};
 }
 
+template <typename T> constexpr Sequence<T> sequence(T end) noexcept {
+  return {T{}, end};
+}
+
 } // namespace util
 
 #endif // MY_LIB_SEQUENCE_H
