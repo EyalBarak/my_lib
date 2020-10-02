@@ -10,7 +10,8 @@
 namespace util {
 
 template <typename T> class Sequence final {
-  static_assert(std::is_integral_v<T>);
+  static_assert(std::is_integral_v<T>,
+                "Sequence supports only integral types!");
 
 public:
   Sequence() = delete;
