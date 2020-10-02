@@ -21,7 +21,8 @@ public:
   constexpr Sequence &operator=(Sequence &&rhs) noexcept = default;
   ~Sequence() noexcept = default;
 
-  constexpr Sequence(T beg, T end) noexcept : beg_{beg}, end_{end} {}
+  constexpr Sequence(const T beg, const T end) noexcept
+      : beg_{beg}, end_{end} {}
 
   class iterator {
   public:
@@ -38,7 +39,7 @@ public:
     constexpr iterator &operator=(iterator &&rhs) noexcept = default;
     ~iterator() noexcept = default;
 
-    constexpr explicit iterator(T val) noexcept : val_(val) {}
+    constexpr explicit iterator(const T val) noexcept : val_(val) {}
 
     constexpr T operator*() const noexcept { return val_; }
 
