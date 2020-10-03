@@ -88,6 +88,12 @@ template <typename T> constexpr Sequence<T> sequence(T end) noexcept {
   return {T{}, end};
 }
 
+template <typename Cont>
+constexpr auto indices(const Cont &container)
+    -> Sequence<decltype(container.size())> {
+  return sequence(container.size());
+}
+
 } // namespace util
 
 #endif // MY_LIB_SEQUENCE_H

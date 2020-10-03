@@ -89,3 +89,16 @@ TEST_P(UnsignedIntPTests, SameAsIota) {
 }
 
 INSTANTIATE_TEST_SUITE_P(UnsignedPs, UnsignedIntPTests, testing::Range(0, 20));
+
+TEST(IndicesTest, WithIota) {
+  auto len{12};
+  std::vector<int> vec(len);
+  std::iota(vec.begin(), vec.end(), 0);
+
+  auto count{0};
+  for (const auto i : util::indices(vec)) {
+    EXPECT_EQ(i, vec[i]);
+    count++;
+  }
+  EXPECT_EQ(count, len);
+}
