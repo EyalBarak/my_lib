@@ -12,7 +12,7 @@
 #include <string>
 
 TEST(BasicSequenceTests, ConstructAndDeref) {
-  auto seq{util::sequence(0, 7)};
+  auto seq {util::sequence(0, 7)};
   EXPECT_EQ(*seq.begin(), 0);
   EXPECT_EQ(*seq.end(), 7);
 }
@@ -25,7 +25,7 @@ TEST(BasicSequenceTests, BasicUsage) {
 }
 
 TEST(BasicSequenceTests, BasicUsageCorrectness) {
-  auto seq{util::sequence(0, 12)};
+  auto          seq {util::sequence(0, 12)};
   std::set<int> flags;
   EXPECT_TRUE(flags.empty());
   for (const auto i : seq) {
@@ -38,9 +38,9 @@ TEST(BasicSequenceTests, BasicUsageCorrectness) {
 }
 
 TEST(BasicSequenceTests, CharTest) {
-  auto result{std::string(5, 'a')};
+  auto result {std::string(5, 'a')};
   EXPECT_EQ(result, "aaaaa");
-  auto seq{util::sequence('a', 'f')};
+  auto seq {util::sequence('a', 'f')};
   std::copy(seq.cbegin(), seq.cend(), result.begin());
   EXPECT_EQ(result, "abcde");
 }
@@ -55,7 +55,7 @@ TEST(BasicSequenceTests, DefaultTest) {
   }();
   auto vec2 = []() {
     std::vector<int> result;
-    for (auto i{0}; i < 10; i++) {
+    for (auto i {0}; i < 10; i++) {
       result.push_back(i);
     }
     return result;
@@ -66,7 +66,7 @@ TEST(BasicSequenceTests, DefaultTest) {
 class UnsignedIntPTests : public testing::TestWithParam<int> {};
 
 TEST_P(UnsignedIntPTests, ArithmeticSumFromZero) {
-  auto sum{0};
+  auto sum {0};
   for (const auto i : util::sequence(0, GetParam())) {
     sum += i;
   }
@@ -81,7 +81,7 @@ TEST_P(UnsignedIntPTests, SameAsIota) {
   }();
   const auto vec2 = []() {
     std::vector<int> result(GetParam(), 0);
-    auto seq{util::sequence(0, GetParam())};
+    auto             seq {util::sequence(0, GetParam())};
     std::copy(seq.begin(), seq.end(), result.begin());
     return result;
   }();
@@ -91,11 +91,11 @@ TEST_P(UnsignedIntPTests, SameAsIota) {
 INSTANTIATE_TEST_SUITE_P(UnsignedPs, UnsignedIntPTests, testing::Range(0, 20));
 
 TEST(IndicesTest, WithIota) {
-  auto len{12};
+  auto             len {12};
   std::vector<int> vec(len);
   std::iota(vec.begin(), vec.end(), 0);
 
-  auto count{0};
+  auto count {0};
   for (const auto i : util::indices(vec)) {
     EXPECT_EQ(i, vec[i]);
     count++;
