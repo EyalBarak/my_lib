@@ -3,6 +3,6 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(run_tests sequence_tests.cpp unq_ptr_il_tests.cpp alg_tests.cpp)
+add_executable(run_tests sequence_tests.cpp unq_ptr_il_tests.cpp alg_tests.cpp strings_tests.cpp)
 
 target_link_libraries(run_tests gtest gtest_main)
